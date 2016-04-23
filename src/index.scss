@@ -1,0 +1,439 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 100;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	transition: color 250ms, background-color 250ms;
+	text-decoration: none;
+}
+
+$primary: #4A90E2;
+
+// ---------------- Main --------------------
+main-view {
+	> section {
+		display: flex;
+		align-items: stretch;
+		height: calc(100% - 3em);
+		margin: 0;
+		padding-top: 3em;
+
+		results-list {
+			flex: 1;
+			overflow-y: scroll;
+			overflow-x: hidden;
+		}
+
+		favorites {
+			flex: 3;
+			overflow-y: scroll;
+			overflow-x: hidden;
+		}
+	}
+}
+
+// ---------------- Navigation --------------
+navigation {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3em;
+	color: white;
+	background-color: $primary;
+	z-index: 10;
+
+	> section {
+		display: flex;
+		height: 100%;
+		> a {
+			flex: 2;
+			padding: .9em 0 0 1em;
+			font-weight: normal;
+			color: white;
+			display: block;
+
+		}
+	}
+}
+
+// ---------------- Results List ------------
+results-list {
+	background-color: lighten($primary, 40%);
+	input {
+		width: calc(100% - 1em - 3px);
+		border: solid thin rgba($primary, 0.25);
+		height: 40px;
+		padding: .5em;
+		font-size: 1em;
+		font-weight: 100;
+		color: rgba($primary, .75);
+		background-color: rgba(255, 255, 255, 0.8);
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+
+		&::-webkit-input-placeholder {
+			color: rgba($primary, .25);
+		}
+		&:-moz-placeholder {
+			color: rgba($primary, .25);
+		}
+		&::-moz-placeholder {
+			color: rgba($primary, .25);
+		}
+		&:-ms-input-placeholder {
+			color: rgba($primary, .25);
+		}
+	}
+
+	.no-results {
+		width: 100%;
+		padding: 3em 0;
+		color: rgba($primary, .5);
+		font-style: italic;
+		margin: 0;
+		text-align: center;
+		background-color: rgba($primary, .125);
+	}
+}
+
+// ---------------- Result ------------------
+result {
+	&:nth-of-type(odd){
+		> div {
+			background-color: lighten($primary, 39%);
+
+			&:hover {
+				background-color: lighten($primary, 38%);
+			}
+		}
+	}
+
+	> div {
+		display: flex;
+		height: 70px;
+		color: $primary;
+		overflow: hidden;
+
+		transition: background-color 250ms;
+
+		&:hover {
+			background-color: lighten($primary, 38%);
+		}
+
+		> div:first-child {
+			flex: 1;
+			text-align: center;
+			padding-top: 10px;
+
+			> img {
+				height: 50px;
+				width: 50px;
+				border-radius: 10px;
+			}
+
+			.placeholder {
+				height: 50px;
+				width: 50px;
+				border-radius: 10px;
+				display: block;
+				background-color: lighten($primary, 30%);
+				margin: auto;
+			}
+		}
+		> div:last-child {
+			flex: 3;
+			padding-top: 10px;
+			font-weight: normal;
+			position: relative;
+
+			span {
+				padding-top: .25em;
+				width: 83%;
+				display: block;
+				overflow: hidden;
+				font-size: .85em;
+
+				&.artist {
+					color: lighten($primary, 20%);
+				}
+			}
+
+			i {
+				color: lighten($primary, 30%);
+				cursor: pointer;
+				position: absolute;
+				top: 20px;
+				right: 10px;
+				padding: 10px;
+
+				transition: color 250ms;
+
+				&:hover {
+					color: lighten($primary, 10%);
+				}
+			}
+		}
+	}
+}
+
+// ---------------- Favorites ---------------
+favorites {
+	section {
+		display: flex;
+		flex-flow: wrap;
+		padding: 0 1em;
+
+		h1 {
+			width: 100%;
+			display: block;
+			font-size: 3em;
+			font-weight: 100;
+			margin: .75em 0 .5em;
+			color: rgba($primary, .5);
+			padding: 0 0 0 .5em;
+			line-height: 1em;
+		}
+
+		favorite {
+			flex: 1;
+			margin: 1em 0;
+			max-width: 200px;
+		}
+	}
+}
+
+// ---------------- Favorite ----------------
+favorite {
+	> div {
+		width: 200px;
+		text-align: center;
+		color: lighten($primary, 10%);
+		border: solid thin transparent;
+		border-radius: 1em;
+		cursor: pointer;
+
+		transition: background-color 250ms, border-color 250ms, color 250ms;
+
+		&:hover {
+			background-color: lighten($primary, 39%);
+		}
+
+		&.active {
+			color: $primary;
+			background-color: lighten($primary, 35%);
+			border-color: lighten($primary, 30%);
+		}
+
+		img {
+			margin-top: 1em;
+			height: 150px;
+			width: 150px;
+			border-radius: .5em;
+		}
+
+		p {
+			text-align: center;
+		}
+	}
+}
+
+// ---------------- Detail View -------------
+detail-view {
+	> section {
+		display: flex;
+		align-items: stretch;
+		height: calc(100% - 3em);
+		margin: 0;
+		padding-top: 3em;
+		position: relative;
+
+		> .back {
+			position: absolute;
+			top: 3em;
+			right: 1em;
+			padding: 1em;
+			color: rgba($primary, .5);
+		}
+
+		> .delete {
+			position: absolute;
+			top: 3em;
+			right: 4em;
+			padding: 1em;
+			color: rgba($primary, .5);
+		}
+
+		> aside {
+			flex: 1;
+			height: 100%;
+
+			background-color: $primary;
+			color: white;
+
+			> .image {
+				display: block;
+				width: 100%;
+				height: 180px;
+				overflow: hidden;
+				position: relative;
+
+				> h2 {
+					position: absolute;
+					z-index: 12;
+					bottom: 0;
+					font-size: 1em;
+					left: 1em;
+					font-weight: 100;
+					text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+				}
+
+				>.fa {
+					position: absolute;
+					z-index: 13;
+					top: 0;
+					right: 0;
+					cursor: pointer;
+					padding: 1em;
+					font-size: 1em;
+					color: rgba(white, 0.5);
+				}
+
+				> .gradient {
+					width: 100%;
+					height: 100%;
+
+					background: -moz-linear-gradient(top, rgba(74,144,226,0) 0%, rgba(74,144,226,0) 53%, rgba(74,144,226,1) 100%); /* FF3.6-15 */
+					background: -webkit-linear-gradient(top, rgba(74,144,226,0) 0%,rgba(74,144,226,0) 53%,rgba(74,144,226,1) 100%); /* Chrome10-25,Safari5.1-6 */
+					background: linear-gradient(to bottom, rgba(74,144,226,0) 0%,rgba(74,144,226,0) 53%,rgba(74,144,226,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004a90e2', endColorstr='#4a90e2',GradientType=0 ); /* IE6-9 */
+
+					position: absolute;
+				}
+
+				> img {
+					width: 100%;
+				}
+			}
+
+			> .bio {
+				font-size: .8em;
+				line-height: 2em;
+				height: calc(100% - 180px - 3em);
+				padding: 2em 3em 1em 2em;
+				overflow-y: scroll;
+
+				a {
+					color: darken($primary, 25%);
+				}
+			}
+		}
+
+		> article {
+			flex: 3;
+			padding: 1em;
+			height: calc(100% - 2em);
+			overflow: hidden;
+
+			> ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 47px;
+				border-bottom: solid thin rgba($primary, 0.5);
+				li {
+					display: inline-block;
+
+					a {
+						font-size: 1em;
+						color: rgba($primary, 0.5);
+						display: block;
+						padding: .9em;
+						border-bottom: solid thin transparent;
+
+						&:hover {
+							color: rgba($primary, .75);
+						}
+
+						&.router-link-active {
+							color: $primary !important;
+							border-bottom-color: $primary;
+						}
+					}
+				}
+			}
+
+			> .content {
+				margin-top: 1em;
+				color: grey;
+				height: calc(100% - 47px);
+				overflow: hidden;
+			}
+		}
+	}
+}
+
+// ---------------- Similar Artists ---------
+similar-artists {
+	> section {
+		height: 100%;
+		overflow-y: scroll;
+		ul {
+			margin: 0;
+			padding: 0 2em;
+			li {
+				padding: .5em 0;
+			}
+		}
+	}
+}
+
+// ---------------- Top Albums --------------
+top-albums {
+	> section {
+		height: 100%;
+		overflow-y: scroll;
+		display: flex;
+		flex-wrap: wrap;
+
+		> div {
+			min-width: 200px;
+			max-width: 200px;
+			max-height: 200px;
+			flex: 1;
+			position: relative;
+			overflow: hidden;
+
+			> img {
+				width: 100%;
+			}
+
+			> .placeholder {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba($primary, .5);
+			}
+
+			> p {
+				position: absolute;
+				bottom: 0;
+				font-size: .9em;
+				left: .5em;
+				color: white;
+				text-shadow: 1px 1px 2px black;
+			}
+		}
+	}
+}
