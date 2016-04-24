@@ -1,5 +1,5 @@
 // NG2
-import {injectAsync, TestComponentBuilder, describe, inject, it, expect} from 'angular2/testing';
+import {injectAsync, TestComponentBuilder, describe, it, expect} from 'angular2/testing';
 // App
 import {SeekApp} from './seek.component';
 
