@@ -1,17 +1,16 @@
-import {Component, provide} from 'angular2/core';
-import {AsyncTestCompleter, describe, expect, inject, it, TestComponentBuilder} from 'angular2/testing_internal';
-
+// NG2
+import {injectAsync, TestComponentBuilder, describe, inject, it, expect} from 'angular2/testing';
+// App
 import {SeekApp} from './seek.component';
 
 describe('Component: SeekApp', () => {
-    it('renders it\'s HTML template.', inject([TestComponentBuilder, AsyncTestCompleter], (tcb, async) => {
-        tcb.createAsync(SeekApp)
-            .then((fixture) => {
-                fixture.detectChanges();
-                let appHTML = fixture.debugElement.nativeElement.innerHTML;
-                expect(appHTML).toContain('The Seek App Starter Has Loaded!');
-                async.done();
-            })
-            .catch((e) => console.error(e));
-    }));
+	it('renders it\'s HTML template.', injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+		return tcb.createAsync(SeekApp)
+			.then(fixture => {
+				let componentInstance = fixture.componentInstance;
+				let element = fixture.nativeElement;
+				fixture.detectChanges();
+				expect(element.innerHTML).toContain('The Seek App Starter Has Loaded!');
+			});
+	}));
 });
